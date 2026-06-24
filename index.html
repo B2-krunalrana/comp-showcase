@@ -1,6 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Online demo product store with search, cart, localization, and translation support.">
+        <meta name="author" content="Krunal Rana">
+        <meta name="theme-color" content="#1f4788">
+        <meta name="robots" content="index,follow">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-k6RqeWeci5ZR/Lv4MR0sA0FfDOMk8ZHi0vIjWlIMzF6cYwI+sw2tvQjkW2pZVxT4emNLJlh1tY2ZrP4jKQm8Lg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="style.css">
         <title>Product Store</title>
     </head>
@@ -8,22 +16,22 @@
         <!-- Location & Language Info Bar -->
         <div class="info-bar">
             <div class="info-item">
-                <span id="locationInfo">📍 Detecting location...</span>
+                <span id="locationInfo">Detecting location...</span>
             </div>
             <div class="info-item">
                 <select id="languageSelector" class="language-selector">
-                    <option value="en">🌐 English</option>
-                    <option value="es">🇪🇸 Español</option>
-                    <option value="fr">🇫🇷 Français</option>
-                    <option value="de">🇩🇪 Deutsch</option>
-                    <option value="it">🇮🇹 Italiano</option>
-                    <option value="pt">🇵🇹 Português</option>
-                    <option value="ja">🇯🇵 日本語</option>
-                    <option value="zh">🇨🇳 中文</option>
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="fr">Français</option>
+                    <option value="de">Deutsch</option>
+                    <option value="it">Italiano</option>
+                    <option value="pt">Português</option>
+                    <option value="ja">日本語</option>
+                    <option value="zh">中文</option>
                 </select>
             </div>
             <div class="info-item">
-                <span id="currencyInfo">💱 USD</span>
+                <span id="currencyInfo">USD</span>
             </div>
         </div>
 
@@ -47,7 +55,7 @@
                     <option value="beauty">Beauty</option>
                 </select>
                 <div class="cart-icon" id="cartIcon">
-                    🛒
+                    Cart
                     <div class="cart-badge" id="cartBadge">0</div>
                 </div>
             </div>
@@ -66,6 +74,41 @@
             <div class="loading">Loading products...</div>
         </div>
 
+        <!-- Feature modal button (in content area for visibility) -->
+        <div style="text-align: center; padding: 20px; background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%); margin: 20px 0; border-radius: 12px;">
+            <button id="featureShowBtn" class="feature-show-btn" aria-label="Learn about app features">
+                <i class="fa-solid fa-lightbulb"></i> Discover Features
+            </button>
+            <p style="margin-top: 10px; font-size: 12px; color: #64748b;">Click to explore our advanced capabilities</p>
+        </div>
+
+        <!-- Feature modal slider -->
+        <div class="feature-modal" id="featureModal">
+            <div class="feature-modal-backdrop" id="featureBackdrop"></div>
+            <div class="feature-modal-content">
+                <div class="feature-modal-header">
+                    <div class="feature-modal-title">
+                        <i class="fa-solid fa-star"></i> Feature Spotlight
+                    </div>
+                    <button class="feature-close-btn" id="featureCloseBtn" aria-label="Close features">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="feature-modal-nav">
+                    <button class="feature-nav-btn active" data-feature="0"><i class="fa-solid fa-magnifying-glass"></i> Search & Sort</button>
+                    <button class="feature-nav-btn" data-feature="1"><i class="fa-solid fa-cart-shopping"></i> Cart + Persistence</button>
+                    <button class="feature-nav-btn" data-feature="2"><i class="fa-solid fa-map-location-dot"></i> Location Aware</button>
+                    <button class="feature-nav-btn" data-feature="3"><i class="fa-solid fa-language"></i> Multi-Language</button>
+                </div>
+                <div class="feature-modal-body" id="featureBody"></div>
+                <div class="feature-modal-footer">
+                    <a href="https://www.linkedin.com/in/krunal-rana/" target="_blank" rel="noreferrer" class="feature-linkedin-btn">
+                        <i class="fa-brands fa-linkedin"></i> Connect with Creator
+                    </a>
+                </div>
+            </div>
+        </div>
+
         <!-- Cart Modal -->
         <div class="modal" id="cartModal">
             <div class="modal-content">
@@ -75,6 +118,34 @@
                 <div class="cart-total">
                     <span>Total:</span>
                     <span id="totalPrice">$0.00</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sticky Footer -->
+        <div class="sticky-footer" id="stickyFooter">
+            <div class="footer-content">
+                <div class="footer-stats">
+                    <div class="stat-item">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span id="footerCartCount">0 items</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fa-solid fa-heart"></i>
+                        <span id="footerFavCount">0 saved</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fa-solid fa-tag"></i>
+                        <span id="footerTotal">$0.00</span>
+                    </div>
+                </div>
+                <div class="footer-actions">
+                    <button class="footer-btn btn-primary" id="footerCheckout" aria-label="Proceed to checkout with current cart items">
+                        <i class="fa-solid fa-arrow-right"></i> Checkout
+                    </button>
+                    <button class="footer-btn btn-secondary" id="footerViewFav" aria-label="View your saved favorite items">
+                        <i class="fa-solid fa-bookmark"></i> Favorites
+                    </button>
                 </div>
             </div>
         </div>
@@ -109,11 +180,13 @@
                 localStorage.setItem(DB_KEY, JSON.stringify(cart));
                 updateCartUI();
                 updateStatsUI();
+                updateStickyFooter();
             }
 
             function saveFavoritesToStorage() {
                 localStorage.setItem(FAV_KEY, JSON.stringify(favorites));
                 updateStatsUI();
+                updateStickyFooter();
             }
 
             // ============ GEOLOCATION API ============
@@ -174,7 +247,7 @@
             function updateLocationUI() {
                 if (userLocation) {
                     document.getElementById('locationInfo').textContent = 
-                        `📍 ${userLocation.city}, ${userLocation.country}`;
+                        `${userLocation.city}, ${userLocation.country}`;
                     document.getElementById('timezoneInfo').textContent = userLocation.timezone;
                 }
             }
@@ -246,7 +319,23 @@
                 document.getElementById('languageSelector').value = currentLanguage;
                 renderProducts(filteredProducts);
                 attachEventListeners();
+                renderFeatureSlide(0);
+                attachFeatureEvents();
+                attachFeatureToggle();
+                updateStickyFooter();
                 observeImagesForLazyLoading();
+
+                // Keyboard shortcut to open features
+                window.addEventListener('keydown', (e) => {
+                    if (e.key === '?' || (e.ctrlKey && e.key === '/')) {
+                        document.getElementById('featureModal')?.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                    }
+                    if (e.key === 'Escape') {
+                        document.getElementById('featureModal')?.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    }
+                });
             })
             .catch(error => {
                 console.error('❌ Fetch execution failed:', error.message);
@@ -290,7 +379,7 @@
                                 <button class="favorite-btn ${isFav ? 'active' : ''}" 
                                         onclick="toggleFavorite(${product.id})" 
                                         title="Add to favorites">
-                                    ${isFav ? '❤️' : '🤍'}
+                                    ${isFav ? 'Saved' : 'Save'}
                                 </button>
                                 <div class="image-overlay">${product.description.substring(0, 60)}...</div>
                             </div>
@@ -300,7 +389,7 @@
                                 <div class="product-footer">
                                     <div class="product-price-info">
                                         <div class="product-price">${formatPrice(product.price)}</div>
-                                        <div class="product-rating">⭐ ${product.rating}</div>
+                                        <div class="product-rating">${product.rating} / 5</div>
                                     </div>
                                     <button class="add-to-cart-btn" onclick="addToCart(${product.id})">
                                         ${translations[currentLanguage]?.addCart || 'Add to Cart'}
@@ -314,6 +403,106 @@
                 document.getElementById('totalProducts').textContent = products.length;
                 observeImagesForLazyLoading();
             }
+
+            // ============ FEATURE SLIDER ============
+            const featureSlides = [
+                {
+                    title: 'Search & Sort',
+                    description: 'Powerful search and sorting helps users find the right product fast. This increases engagement and reduces bounce rates.',
+                    impact: 'Fast product discovery boosts conversions and retention.'
+                },
+                {
+                    title: 'Cart + Persistence',
+                    description: 'Cart state is saved in localStorage so users don\'t lose selected products. It creates a reliable shopping experience.',
+                    impact: 'Persistent carts increase repeat visits and checkout completion.'
+                },
+                {
+                    title: 'Location Aware',
+                    description: 'Users see location context and timezone automatically. This makes the storefront feel personalized and global-ready.',
+                    impact: 'Location-aware UI builds trust and relevance for international shoppers.'
+                },
+                {
+                    title: 'Multilingual UI',
+                    description: 'The app supports multiple languages with instant translation of labels and buttons.',
+                    impact: 'Language support broadens audience reach and improves accessibility.'
+                }
+            ];
+
+            function renderFeatureSlide(index) {
+                const slide = featureSlides[index];
+                const body = document.getElementById('featureBody');
+                body.innerHTML = `
+                    <div class="feature-slide-content">
+                        <div class="feature-slide-icon">
+                            <i class="fa-solid fa-sparkles"></i>
+                        </div>
+                        <h2>${slide.title}</h2>
+                        <p>${slide.description}</p>
+                        <div class="feature-impact-box">
+                            <i class="fa-solid fa-rocket"></i>
+                            <p><strong>Business Impact:</strong> ${slide.impact}</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function attachFeatureEvents() {
+                document.querySelectorAll('.feature-nav-btn').forEach(button => {
+                    button.addEventListener('click', () => {
+                        document.querySelectorAll('.feature-nav-btn').forEach(btn => btn.classList.remove('active'));
+                        button.classList.add('active');
+                        renderFeatureSlide(Number(button.dataset.feature));
+                    });
+                });
+            }
+
+            function attachFeatureToggle() {
+                const showBtn = document.getElementById('featureShowBtn');
+                const closeBtn = document.getElementById('featureCloseBtn');
+                const backdrop = document.getElementById('featureBackdrop');
+                const modal = document.getElementById('featureModal');
+
+                if (showBtn) {
+                    showBtn.addEventListener('click', () => {
+                        modal.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                    });
+                }
+
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', () => {
+                        modal.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    });
+                }
+
+                if (backdrop) {
+                    backdrop.addEventListener('click', () => {
+                        modal.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    });
+                }
+            }
+
+            // ============ STICKY FOOTER MANAGEMENT ============
+            function updateStickyFooter() {
+                const cartTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                document.getElementById('footerCartCount').textContent = `${cart.length} item${cart.length !== 1 ? 's' : ''}`;
+                document.getElementById('footerFavCount').textContent = `${favorites.length} saved`;
+                document.getElementById('footerTotal').textContent = formatPrice(cartTotal);
+            }
+
+            // Sticky footer button listeners
+            document.getElementById('footerCheckout')?.addEventListener('click', () => {
+                showCartModal();
+            });
+
+            document.getElementById('footerViewFav')?.addEventListener('click', () => {
+                const favItems = allProducts.filter(p => favorites.some(f => f.id === p.id));
+                filteredProducts = [...favItems];
+                renderProducts(filteredProducts);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
 
             // ============ SEARCH & FILTER ============
             function attachEventListeners() {
