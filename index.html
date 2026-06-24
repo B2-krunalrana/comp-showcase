@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="comp-01">
+            <div class="image-con" id="image-com">
+                <img src="" alt="">
+            </div>
+            <div class="title-com" id="description-com">
+            </div>
+        </div>
+        <script>
+            // 1. Define the base configuration
+                const API_URL = 'https://dummyjson.com/products';
+
+                // 2. Execute the fetch stream
+                fetch(API_URL, { method: 'GET' })
+                .then(response => {
+                    // 3. Intercept HTTP error statuses (like 404 or 500)
+                    if (!response.ok) {
+                    throw new Error(`HTTP Error Status: ${response.status}`);
+                    }
+                    // 4. Return parsed JSON payload to the next block
+                    return response.json(); 
+                })
+                .then(data => {
+                    // 5. Safely process your structured data payload
+                    console.log('Success! API Data:', data);
+
+                    renderUI(data); 
+                })
+                .catch(error => {
+                    // 6. Centrally catch network issues and thrown statuses
+                    console.error('Fetch execution failed:', error.message);
+                    showErrorState(error);
+                });
+
+                // Target placeholder functions for the data stream
+                function renderUI(data) { 
+                    console.log(data.products)
+                    
+                    const container = document.querySelector('.comp-01');
+                    container.innerHTML = ''; // Clear existing content
+
+                    /* Loop through all products and append to DOM (limit to 10) */ 
+                    for (let comp = 0; comp < Math.min(10, data.products.length); comp++) {
+                        const product = data.products[comp];
+                        const productHTML = `
+                            <div class="product-item">
+                                <div class="image-con">
+                                    <img src="${product.thumbnail}" alt="${product.title}">
+                                    <div class="image-overlay">${product.description.substring(0, 50)}...</div>
+                                </div>
+                                <div class="title-com">
+                                    <h3>${product.title}</h3>
+                                    <p>${product.description.substring(0, 50)}...</p>
+                                    <div class="product-price">$${product.price}</div>
+                                    <div class="product-rating">⭐ ${product.rating}</div>
+                                </div>
+                            </div>
+                        `;
+                        container.innerHTML += productHTML;
+                    }
+                    console.log("loop end")
+                
+                }
+                function showErrorState(err) { /* Notify user here */ }
+
+
+        </script>
+    </body>
+</html>

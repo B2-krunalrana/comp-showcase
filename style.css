@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 30px;
+}
+
+.comp-01{
+    padding:25px;
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    border-radius:20px;
+}
+
+.product-item{
+    flex:0 0 calc(10% - 18px);
+    border-radius:12px;
+    padding:0;
+    text-align:center;
+}
+
+.product-item .image-con {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.product-item .image-con img{
+    width:100%;
+    height:150px;
+    object-fit:cover;
+    border-radius:8px;
+    transition: transform 0.3s ease;
+    display: block;
+}
+
+.product-item:hover .image-con img {
+    transform: scale(1.08);
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    display: flex;
+    align-items: flex-end;
+    padding: 10px;
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.product-item:hover .image-overlay {
+    opacity: 1;
+}
+
+.product-item .title-com {
+    padding: 10px;
+}
+
+.product-item .title-com h3{
+    font-size:14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.product-item .title-com p {
+    font-size: 11px;
+    color: #666;
+    line-height: 1.3;
+    margin-bottom: 6px;
+}
+
+.product-price {
+    color: #667eea;
+    font-weight: bold;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.product-rating {
+    color: #f39c12;
+    font-size: 11px;
+    margin-top: 4px;
+}
+
+.image-con.img {
+    width:70%;
+    padding:20%;
+}
+
+.image-con img:hover{
+    background:aqua;
+}
+
+
+
+
